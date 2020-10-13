@@ -1,31 +1,15 @@
 package com.senix22.costs_counting;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.*;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.stream.IntStream;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -71,8 +55,9 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void addToHashMap(String priceString, String product) {
-        int price = Integer.parseInt(priceString);
         try {
+        int price = Integer.parseInt(priceString);
+
 
             if (map.containsKey(product)) {
 
@@ -87,8 +72,6 @@ public class StartActivity extends AppCompatActivity {
         }catch (NullPointerException e){
             Toast.makeText(getApplicationContext(),"Fill the line",Toast.LENGTH_LONG).show();
 
-        }catch (NumberFormatException e){
-            Toast.makeText(getApplicationContext(),"Fill the line",Toast.LENGTH_LONG).show();
         }
 
 

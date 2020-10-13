@@ -5,32 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.*;
+import java.util.Map;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-
-import java.util.HashMap;
-import java.util.stream.IntStream;
 
 public class CountingResultActivity extends AppCompatActivity {
     private static String TAG = CountingResultActivity.class.getSimpleName();
     int sum;
     private LayoutInflater mInflater;
-    TextView tvView, text2;
-
+    private   TextView tvView, text2;
+    private StringBuilder builder = new StringBuilder();
+   private Button finishBut;
 
 
     @Override
@@ -39,17 +33,12 @@ public class CountingResultActivity extends AppCompatActivity {
         setContentView(R.layout.view);
         tvView = (TextView) findViewById(R.id.tvView);
         text2 = (TextView) findViewById(R.id.Text2);
-
-        ListView listView = (ListView) findViewById(R.id.listView);
-
-//        Bundle extras = getIntent().getExtras();
+        finishBut = (Button)findViewById(R.id.finishBut);
         Intent intent = getIntent();
         HashMap<String, Integer> hashMap = (HashMap<String,Integer >) intent.getSerializableExtra("map");
-        // MyAdapter adapter = new MyAdapter(hashMap);
-        Log.e(TAG, hashMap.toString());
-//        MyAdapter adapter;
-//        adapter = new ArrayAdapter(this,hashMap);
-//        listView.setAdapter(adapter);
+
+        Log.d(TAG, hashMap.toString());
+
 
 
         //get value from hash to new list
@@ -57,30 +46,28 @@ public class CountingResultActivity extends AppCompatActivity {
         ArrayList<Integer>  priceSum = new ArrayList<>(hashMap.values());
 
         doSum(priceSum);
-        Log.e(TAG, String.valueOf(priceSum));
-        Log.e(TAG, String.valueOf(sum));
-//        View view = mInflater.inflate(R.layout.)
+        parseMapInteString(hashMap);
+        Log.d(TAG, String.valueOf(priceSum));
+        Log.d(TAG, String.valueOf(builder));
 
 
 
+        text2.setText("Ur sum = " + String.valueOf(sum));
+        text2.setTextSize(32);
 
-        tvView.setText("Ur sum = " + String.valueOf(sum));
-        tvView.setTextSize(32);
-        //tvView.setText(priceSum.toString());
-        text2.setText(hashMap.toString());
+        tvView.setText(builder);
+        tvView.setTextSize(24);
+        tvView.setTextColor(Color.BLUE);
 
-
-//        price = extras.getInt("map");
-//        priceSum.add(price);
-//        intent.getIntegerArrayListExtra(String.valueOf(hashMap));
-
-
-
-
-        // tvView.setText(hashMap.get("key"));
-        //int price = intent.getIntExtra("price",10);
-
-        //  String product = intent.getStringExtra("product");
+    finishBut.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    });
 
     }
     public void doSum(ArrayList<Integer>  priceSum) {
@@ -90,5 +77,12 @@ public class CountingResultActivity extends AppCompatActivity {
 
         }
 
+    }
+    private String  parseMapInteString(HashMap<String, Integer>map){
+
+        for(Map.Entry<String, Integer> pair: map.entrySet()){
+            builder.append(pair.getKey() + " : " +  + pair.getValue() + "  "+ "\n");
+        }
+        return builder.toString();
     }
 }

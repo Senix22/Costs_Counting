@@ -1,32 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="299dp"
-        android:layout_height="match_parent">
-
-    </ListView>
-
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvView"
-        android:layout_width="227dp"
-        android:layout_height="78dp"
-        android:layout_marginBottom="446dp"
-        android:gravity="bottom">
-
-    </TextView>
+        android:layout_width="match_parent"
+        android:layout_height="270dp" />
 
     <TextView
         android:id="@+id/Text2"
-        android:layout_width="221dp"
-        android:layout_height="82dp"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="-47dp"
-        android:gravity="center" />
+        android:layout_width="match_parent"
+        android:layout_height="269dp">
 
-</RelativeLayout>
+    </TextView>
+
+    <Button
+        android:id="@+id/finishBut"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Finish" />
+
+</LinearLayout>
